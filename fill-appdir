@@ -1,0 +1,35 @@
+#! /bin/sh
+
+
+( [ $# = 0 ] ||
+  [ "$1" = --help ] ||
+  [ "S1" = -h ] ) \
+&& {
+  echo "Usage: fill-appdir [pkg list]"
+  echo "  The packages will be installed system-wide, then copied into ./AppDir."
+}
+
+debian () {
+  apt-get -qq --yes --force-yes update
+  apt-get -qq --yes --force-yes install "$@"
+  dpkg-query -L "$@"
+}
+
+archlinux () {
+  pacman -Syu "$@"
+  pacman -Qql "$@"
+}
+
+list () {
+  command -v dpkg-query && debian "$@"
+  command -v pacman     && archlinux "$@"
+}
+
+copy () {
+  while read l; do
+    test -d $l && mkdir -p AppDir/$l
+    test -f $l && cp -a $l AppDir
+  done
+}
+
+list "$@" | sort -u | copy
