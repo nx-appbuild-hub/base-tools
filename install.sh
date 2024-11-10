@@ -1,7 +1,7 @@
 #! /bin/sh
 
 
-mkdir "${BIN:=$HOME/.bin}"
+mkdir -p "${BIN:=$HOME/.bin}"
 cd "$BIN"
 
 
