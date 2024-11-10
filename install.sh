@@ -10,9 +10,7 @@ get () { curl -sLo "$@"; chmod +x "$1"; }
 get appimagetool \
     https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage
 
-get mkappdir \
-    https:
-
-
+get fill-appdir \
+    https://raw.githubusercontent.com/nx-appbuild-hub/base-tools/refs/heads/main/fill-appdir
 
 echo export PATH="$PATH:$BIN"
