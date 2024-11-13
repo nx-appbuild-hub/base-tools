@@ -20,9 +20,10 @@ list () {
 }
 
 copy () {
+  set -x
   while read l; do
     test -d $l && mkdir -p AppDir/$l
-    test -f $l && cp -a $l AppDir
+    test -f $l && cp -a $l AppDir/$l
   done
 }
 
