@@ -4,13 +4,14 @@
 #   The packages will be installed system-wide, then copied into ./AppDir.
 
 debian () {
-  sudo apt-get -qq --yes --force-yes update
-  sudo apt-get -qq --yes --force-yes install "$@"
+  (sudo apt-get -qq --yes --force-yes update
+   sudo apt-get -qq --yes --force-yes install "$@") > /dev/null
+
   dpkg-query -L "$@"
 }
 
 archlinux () {
-  sudo pacman -Syu "$@"
+  sudo pacman -Syu "$@" > /dev/null
   pacman -Qql "$@"
 }
 
@@ -21,8 +22,8 @@ list () {
 
 copy () {
   while read l; do
-    test -d $l && mkdir -p AppDir/$l
-    test -f $l && cp -a $l AppDir/$l
+    test -d "$l" && mkdir -p AppDir/$l
+    test -f "$l" && cp -a $l AppDir/$l
   done
 }
 
