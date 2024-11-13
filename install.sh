@@ -4,7 +4,6 @@
 mkdir -p "${BIN:=$HOME/.bin}"
 cd "$BIN"
 
-
 get () { curl -sLo "$@"; chmod +x "$1"; }
 
 get appimagetool \
@@ -12,5 +11,3 @@ get appimagetool \
 
 get fill-appdir \
     https://raw.githubusercontent.com/nx-appbuild-hub/base-tools/refs/heads/main/fill-appdir
-
-echo export PATH="$PATH:$BIN"

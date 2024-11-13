@@ -10,13 +10,13 @@
 }
 
 debian () {
-  apt-get -qq --yes --force-yes update
-  apt-get -qq --yes --force-yes install "$@"
+  sudo apt-get -qq --yes --force-yes update
+  sudo apt-get -qq --yes --force-yes install "$@"
   dpkg-query -L "$@"
 }
 
 archlinux () {
-  pacman -Syu "$@"
+  sudo pacman -Syu "$@"
   pacman -Qql "$@"
 }
 
@@ -27,8 +27,8 @@ list () {
 
 copy () {
   while read l; do
-    test -d $l && mkdir -p AppDir/$l
-    test -f $l && cp -a $l AppDir
+    test -d $l && echo mkdir -p AppDir/$l
+    test -f $l && echo cp -a $l AppDir
   done
 }
 
